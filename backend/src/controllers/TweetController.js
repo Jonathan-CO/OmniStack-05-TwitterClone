@@ -14,7 +14,7 @@ module.exports = {
             author,
             content,
         })
-
+        req.io.emit('tweet', tweet);
         return res.json(tweet);
     }
 

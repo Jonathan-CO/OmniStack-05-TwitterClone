@@ -8,6 +8,9 @@ module.exports ={
 
         tweet.set({likes: tweet.likes + 1})
         await tweet.save();
-        return res.json(tweet)
+
+        req.io.emit('like', tweet);
+        
+        return res.json(tweet);
     }
 }
