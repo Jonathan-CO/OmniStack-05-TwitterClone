@@ -9,12 +9,13 @@ module.exports = {
     },
 
     async store (req, res) {
-        const {} = req.body
-        const tweet = await tweet.create({
+        const {author, content} = req.body
+        const tweet = await Tweet.create({
             author,
             content,
-            likes,
         })
+
+        return res.json(tweet);
     }
 
 }
