@@ -1,9 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Timeline from './pages/Timeline';
 
 function App() {
   return (
-    <h1>Hello World</h1>
-      );
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Login}/>
+        <Route path="/timeline" component={Timeline}/>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
