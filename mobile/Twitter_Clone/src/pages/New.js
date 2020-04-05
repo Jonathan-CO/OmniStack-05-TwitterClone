@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../services/api";
 
 import {
@@ -8,46 +8,39 @@ import {
   TouchableOpacity,
   TextInput,
   AsyncStorage,
-  StyleSheet
+  StyleSheet,
+  Image,
+  Alert
 } from "react-native";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Close from '../assets/close.png'
 
-export default class New extends Component {
-  static navigationOptions = {
-    header: null
-  };
 
-  state = {
-    newTweet: ""
-  };
+export default function New({navigation}){
+  const [newTweet, setNewTweet] = useState('');
 
-  goBack = () => {
-    this.props.navigation.pop();
-  };
+  async function handleTweet(){
+    const content = newTweet;
+    const author = await AsyncStorage.getItem('@TwitterClone:username');
+    Alert.alert("Content", content)
+    Alert.alert("Author", author)
+    
+    await api.post('tweets', {author, content} );
 
-  handleTweet = async () => {
-    const content = this.state.newTweet;
-    const author = await AsyncStorage.getItem("@OmniStack:username");
+    navigation.pop();
+    //Alert.alert("Message", "Finally")
+  }
 
-    await api.post("tweets", { author, content });
-
-    this.goBack();
-  };
-
-  handleInputChange = newTweet => {
-    this.setState({ newTweet });
-  };
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
+  return (
+    <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={this.goBack}>
-            <Icon name="close" size={24} color="#4BB0EE" />
+          <TouchableOpacity onPress={()=>{navigation.pop()}}>
+            <Image source={Close}
+            style={{width:24, height:24}}
+            tintColor="#4bb0ee"/>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={this.handleTweet}>
+          <TouchableOpacity style={styles.button} onPress={handleTweet}>
             <Text style={styles.buttonText}>Tweetar</Text>
           </TouchableOpacity>
         </View>
@@ -57,14 +50,13 @@ export default class New extends Component {
           multiline
           placeholder="O que está acontecendo?"
           placeholderTextColor="#999"
-          value={this.state.newTweet}
-          onChangeText={this.handleInputChange}
+          value={newTweet}
+          onChangeText={setNewTweet}
           returnKeyType="send"
-          onSubmitEditing={this.handleTweet}
+          onSubmitEditing={handleTweet}
         />
       </SafeAreaView>
-    );
-  }
+  )
 }
 
 const styles = StyleSheet.create({
