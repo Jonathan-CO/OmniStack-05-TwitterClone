@@ -1,12 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {
+    KeyboardAvoidingView, 
+    View, 
+    Text, 
+    TextInput, 
+    TouchableOpacity, 
+    StyleSheet,
+    Image
+} from 'react-native';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import twitter from '../assets/twitter.png';
 
 export default function Login(){
+    const [username, setUsename] = useState('');
     return (
-        <View style={styles.container}>
-            <Text>Bem Vindo ao Twitter Clone</Text>
-        </View>
+        <KeyboardAvoidingView 
+        behavior="padding"
+        style={styles.container}>
+            <View style={styles.content}>
+                {/* <Icon name="twitter" size={64} color="#4bb0ee" /> */}
+                <Image 
+                source={twitter} 
+                style={{ width:64, height:64 }} 
+                tintColor={"#4bb0ee"}/>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nome de Usuário"
+                    value={username}
+                    onChangeText={setUsename}
+                    returnKeyType="send"
+                />
+                <TouchableOpacity 
+                onPress={()=>{}}
+                style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Entrar</Text>
+                </TouchableOpacity>
+            </View>
+           
+        </KeyboardAvoidingView>
     )
 }
 
