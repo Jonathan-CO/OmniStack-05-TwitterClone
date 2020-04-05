@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
     KeyboardAvoidingView, 
@@ -7,14 +7,30 @@ import {
     TextInput, 
     TouchableOpacity, 
     StyleSheet,
-    Image
+    Image,
+    AsyncStorage
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import twitter from '../assets/twitter.png';
 
-export default function Login(){
+export default function Login({navigation}){
     const [username, setUsename] = useState('');
+
+    async function handleLogin(){
+        if(!username) return;
+        await AsyncStorage.setItem('@TwitterClone:username', username)
+        navigation.navigate('Timeline')
+    }
+
+    useEffect(()=>{
+        async function getUsername(){
+            const username = await AsyncStorage.getItem('@TwitterClone:username')
+            if (username){
+                navigation.navigate('Timeline')
+            }
+        }
+    }, [])
     return (
         <KeyboardAvoidingView 
         behavior="padding"
@@ -30,10 +46,11 @@ export default function Login(){
                     placeholder="Nome de Usuário"
                     value={username}
                     onChangeText={setUsename}
+                    onSubmitEditing={handleLogin}
                     returnKeyType="send"
                 />
                 <TouchableOpacity 
-                onPress={()=>{}}
+                onPress={handleLogin}
                 style={styles.button}
                 >
                     <Text style={styles.buttonText}>Entrar</Text>
