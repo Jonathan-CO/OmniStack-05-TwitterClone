@@ -1,4 +1,24 @@
+import React from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import Hearth from '../assets/hearth.png'
 
+export default function Tweet({tweet}){
+  return (
+    <View style={styles.container}>
+      <Text style={styles.author}>{tweet.author}</Text>
+      <Text style={styles.content}>{tweet.content}</Text>
+
+      <TouchableOpacity
+      onPress={()=>{}}
+      style={styles.likeButton}>
+        <Image source={Hearth} 
+        style={{width: 20, height:20}} 
+        tintColor="#999"/>
+        <Text style={styles.likeText}>{tweet.likes}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {

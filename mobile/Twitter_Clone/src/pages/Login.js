@@ -11,7 +11,6 @@ import {
     AsyncStorage
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import twitter from '../assets/twitter.png';
 
 export default function Login({navigation}){
@@ -30,6 +29,8 @@ export default function Login({navigation}){
                 navigation.navigate('Timeline')
             }
         }
+
+        getUsername();
     }, [])
     return (
         <KeyboardAvoidingView 
