@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Tweet.css';
 import Like from '../like.svg';
 import api from '../services/api';

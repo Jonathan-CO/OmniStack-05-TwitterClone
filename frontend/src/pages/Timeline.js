@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import socket from 'socket.io-client';
-
 import api from '../services/api';
 import './Timeline.css';
 import Tweet from '../components/Tweet';
-
-
 import twitterLogo from '../twitter.svg';
 
 export default function Timeline() {
@@ -21,8 +18,7 @@ export default function Timeline() {
       setTweets(response.data);
     }
     getTweets();
-    
-  }, [])
+  }, []);
 
   async function handleNewTweet(e) {
     if (e.keyCode !== 13) return;
@@ -31,24 +27,19 @@ export default function Timeline() {
 
     await api.post('/tweets', {
       author, content
-    })
-
-
+    });
     setNewTweet('');
-    // console.log("My tweets" + tweets)
-
   }
 
   useEffect(()=>{
     io.on('tweet', data =>{
       console.log(data)
       setTweets([data,...tweets])
-      // console.log(tweets)
     })
     io.on('like', data =>{
       setTweets(tweets.map(tweet => tweet._id === data._id ? data : tweet))
     })
-  }, [io, tweets])
+  }, [io, tweets]);
 
   return (
     <div className="timeline-wrapper">
@@ -61,7 +52,6 @@ export default function Timeline() {
           placeholder="O que está acontecendo?"
         />
       </form>
-
 
       <ul className="tweet-list">
         {tweets.map(tweet => (
