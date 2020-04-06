@@ -16,13 +16,13 @@ This app features all the latest tools and practices in mobile development!
 - ♻️ **Socket IO** — A library for realtime web applications 
 
 
-##Notes: 
+## Notes: 
 <br />
 
 Week 5 was developed with previous versions of all tools used. Thus, this project presents differences in relation to the original project, as to the development mode, maintaining the essence of the original project's functionalities.
 <br/>
 
-###Main Differences:
+### Main Differences:
 Change from using class to using Hooks
 Change of route structure in the Mobile App, using React Navigation 5
 
