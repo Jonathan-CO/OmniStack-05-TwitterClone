@@ -1,7 +1,10 @@
 # Twitter Clone
 
 Twitter Clone is a project developed at OmniStack 05 Week, which aims to develop a complete application with a Stack based fully in JS, using Node JS, React JS and React Native.
+</br>
 For this, it was used the development arquiteture called MVC, which means a Model layer, a View Layer and a Controller layer. The V and C layers be on frontend development and the M layer be on backend development. So, the layers V and C are in distincts locales of the M layers!
+
+
 
 ## Features
 
