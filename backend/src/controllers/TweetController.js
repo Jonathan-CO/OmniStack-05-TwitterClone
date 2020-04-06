@@ -1,6 +1,5 @@
 const Tweet = require('../models/Tweet');
 
-
 module.exports = {
 
     async index(req, res){
@@ -17,5 +16,4 @@ module.exports = {
         req.io.emit('tweet', tweet);
         return res.json(tweet);
     }
-
 }
