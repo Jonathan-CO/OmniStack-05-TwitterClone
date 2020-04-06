@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Hearth from '../assets/hearth.png'
-
 import api from '../services/api';
 
 export default function Tweet({tweet}){

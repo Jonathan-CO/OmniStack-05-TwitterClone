@@ -6,12 +6,9 @@ import Login from './pages/Login';
 import Timeline from './pages/Timeline';
 import New from './pages/New';
 import { AsyncStorage, TouchableOpacity, Image, Text } from 'react-native';
-
 import Add_Circle from './assets/add_circle.png'
 
-
 const Stack = createStackNavigator();
-
 const Home = createStackNavigator();
 
 function App({ navigation }) {
@@ -45,7 +42,6 @@ function App({ navigation }) {
                 options={{ title: 'New', headerShown: false }}
             />
         </Home.Navigator>
-
     )
 }
 
@@ -57,6 +53,5 @@ export default function Routes() {
                 <Stack.Screen name="Home" component={App} />
             </Stack.Navigator>
         </NavigationContainer>
-
     )
 }

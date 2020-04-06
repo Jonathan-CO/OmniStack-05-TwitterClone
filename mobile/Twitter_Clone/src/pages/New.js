@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
-
 import {
   SafeAreaView,
   View,
@@ -15,7 +14,6 @@ import {
 
 import Close from '../assets/close.png'
 
-
 export default function New({navigation}){
   const [newTweet, setNewTweet] = useState('');
 
@@ -24,7 +22,6 @@ export default function New({navigation}){
     const author = await AsyncStorage.getItem('@TwitterClone:username');
     await api.post('tweets', {author, content} );
     navigation.pop();
-    //Alert.alert("Message", "Finally")
   }
 
   return (

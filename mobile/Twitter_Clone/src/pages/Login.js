@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-
 import {
     KeyboardAvoidingView, 
     View, 
@@ -16,8 +15,6 @@ import twitter from '../assets/twitter.png';
 export default function Login({navigation}){
     const [username, setUsename] = useState('');
 
-
-
     async function handleLogin(){
         if(!username) return;
         await AsyncStorage.setItem('@TwitterClone:username', username)
@@ -32,13 +29,13 @@ export default function Login({navigation}){
             }
         }
         getUsername();
-    }, [])
+    }, []);
+
     return (
         <KeyboardAvoidingView 
         behavior="padding"
         style={styles.container}>
             <View style={styles.content}>
-                {/* <Icon name="twitter" size={64} color="#4bb0ee" /> */}
                 <Image 
                 source={twitter} 
                 style={{ width:64, height:64 }} 
@@ -58,7 +55,6 @@ export default function Login({navigation}){
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
             </View>
-           
         </KeyboardAvoidingView>
     )
 }
@@ -68,7 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#FFF"
       },
-    
+
       content: {
         flex: 1,
         justifyContent: "center",
