@@ -22,11 +22,7 @@ export default function New({navigation}){
   async function handleTweet(){
     const content = newTweet;
     const author = await AsyncStorage.getItem('@TwitterClone:username');
-    Alert.alert("Content", content)
-    Alert.alert("Author", author)
-    
     await api.post('tweets', {author, content} );
-
     navigation.pop();
     //Alert.alert("Message", "Finally")
   }

@@ -16,20 +16,21 @@ import twitter from '../assets/twitter.png';
 export default function Login({navigation}){
     const [username, setUsename] = useState('');
 
+
+
     async function handleLogin(){
         if(!username) return;
         await AsyncStorage.setItem('@TwitterClone:username', username)
-        navigation.navigate('Timeline')
+        navigation.navigate('Home', {screen: 'Timeline'})
     }
 
     useEffect(()=>{
         async function getUsername(){
             const username = await AsyncStorage.getItem('@TwitterClone:username')
             if (username){
-                navigation.navigate('Timeline')
+                navigation.navigate('Home', {screen: 'Timeline'})
             }
         }
-
         getUsername();
     }, [])
     return (

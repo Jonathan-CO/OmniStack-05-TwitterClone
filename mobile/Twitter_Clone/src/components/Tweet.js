@@ -2,14 +2,22 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Hearth from '../assets/hearth.png'
 
+import api from '../services/api';
+
 export default function Tweet({tweet}){
+
+  function handleLike(){
+    const {_id} = tweet;
+    api.post(`likes/${_id}`) 
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.author}>{tweet.author}</Text>
       <Text style={styles.content}>{tweet.content}</Text>
 
       <TouchableOpacity
-      onPress={()=>{}}
+      onPress={handleLike}
       style={styles.likeButton}>
         <Image source={Hearth} 
         style={{width: 20, height:20}} 

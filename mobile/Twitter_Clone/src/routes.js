@@ -5,84 +5,58 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './pages/Login';
 import Timeline from './pages/Timeline';
 import New from './pages/New';
-import { AsyncStorage, TouchableOpacity, Image } from 'react-native';
+import { AsyncStorage, TouchableOpacity, Image, Text } from 'react-native';
 
 import Add_Circle from './assets/add_circle.png'
 
 
 const Stack = createStackNavigator();
-const AppStack = createStackNavigator();
 
-function App({navigation}) {
+const Home = createStackNavigator();
+
+function App({ navigation }) {
     return (
-        <AppStack.Navigator>
-            <AppStack.Screen
+        <Home.Navigator>
+            <Home.Screen
                 name="Timeline"
                 component={Timeline}
                 options={{
                     title: 'Início',
-                    headerRight: () => (
-                        <TouchableOpacity onPress={()=>navigation.navigate('New')}>
-                           <Image 
-                           source={Add_Circle}
-                           style={{
-                               width:24, 
-                               height:24,
-                               marginRight: 20
-                            }}
-                           tintColor={"#4bb0ee"}
-                           />
+                    headerRight: () => (<>
+                        <TouchableOpacity onPress={() => { navigation.navigate('New') }}>
+                            <Image
+                                source={Add_Circle}
+                                style={{ width: 24, height: 24, marginRight: 20 }}
+                                tintColor={"#4bb0ee"}
+                            />
                         </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { AsyncStorage.removeItem('@TwitterClone:username') 
+                        navigation.navigate('Login') 
+                        }}>
+                            <Text style={{ width: 28, fontSize:16, marginRight: 16 }}>Sair</Text>
+                        </TouchableOpacity>
+                    </>
                     ),
-                    // headerStyle: {
-                    //     backgroundColor:"#55a"
-                    // },
                 }}
             />
-            <AppStack.Screen 
+            <Home.Screen
                 name="New"
-                component ={New}
-                options={{
-                    title: 'New',
-                    headerShown: false 
-                    // headerStyle: {
-                    //     backgroundColor:"#55a"
-                    // },
-                }}
+                component={New}
+                options={{ title: 'New', headerShown: false }}
             />
-        </AppStack.Navigator>
+        </Home.Navigator>
+
     )
 }
 
-function Routes() {
-
-    const [sign, setSign] = useState(false)
-    useEffect(() => {
-        async function getUser() {
-            const sign = await AsyncStorage.getItem('@TwitterClone:username');
-            sign ? setSign(true) : setSign(false);
-        }
-        getUser();
-    }, [])
-
+export default function Routes() {
     return (
         <NavigationContainer>
-            <Stack.Navigator >
-                {sign ? (
-                    <Stack.Screen
-                        name="App"
-                        component={App}
-                        options={{ headerShown: false }}
-                    />
-                ) : (
-                        <Stack.Screen
-                            name="Login"
-                            component={Login} />
-                    )
-                }
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Home" component={App} />
             </Stack.Navigator>
         </NavigationContainer>
+
     )
 }
-
-export default Routes;
