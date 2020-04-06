@@ -11,7 +11,9 @@ import twitterLogo from '../twitter.svg';
 export default function Timeline() {
 
   const [newTweet, setNewTweet] = useState('');
-  const [tweets, setTweets] = useState([])
+  const [tweets, setTweets] = useState([]);
+  const io = socket('http://localhost:3333');
+
 
   useEffect(() => {
     async function getTweets(){
@@ -19,7 +21,6 @@ export default function Timeline() {
       setTweets(response.data);
     }
     getTweets();
-    subscribeToEvents();
     
   }, [])
 
@@ -32,18 +33,22 @@ export default function Timeline() {
       author, content
     })
 
+
     setNewTweet('');
+    // console.log("My tweets" + tweets)
+
   }
 
-  function subscribeToEvents(){
-    const io = socket('http://localhost:3333');
+  useEffect(()=>{
     io.on('tweet', data =>{
-      setTweets([data, ...tweets])
+      console.log(data)
+      setTweets([data,...tweets])
+      // console.log(tweets)
     })
     io.on('like', data =>{
-      setTweets(tweets.map(tweet=> tweet._id === data._id ? data : tweet))
+      setTweets(tweets.map(tweet => tweet._id === data._id ? data : tweet))
     })
-  }
+  }, [io, tweets])
 
   return (
     <div className="timeline-wrapper">
